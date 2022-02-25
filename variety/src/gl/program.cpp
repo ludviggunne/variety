@@ -12,7 +12,7 @@ namespace gl {
 		GLcall(glDeleteProgram(_id));
 	}
 
-	bool Program::ComileAndLink(const std::string &vsource, const std::string &fsource, std::stringstream &log) const
+	bool Program::CompileAndLink(const std::string &vsource, const std::string &fsource, std::stringstream &log) const
 	{
 		// Create shaders and submit sources
 		GLuint vshader, fshader;
