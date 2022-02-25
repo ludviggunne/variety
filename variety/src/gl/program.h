@@ -16,7 +16,7 @@ namespace gl {
 		Program();
 		~Program();
 
-		bool ComileAndLink(const std::string &vsource, const std::string &fsource, std::stringstream &log) const;
+		bool CompileAndLink(const std::string &vsource, const std::string &fsource, std::stringstream &log) const;
 		void Use() const;
 
 		template<typename T>
@@ -28,11 +28,13 @@ namespace gl {
 
 
 
-		// (Vtodo): add more uniform setters 
+		// (Vtodo): add more uniform setters
+		// (Vtodo): change name parameter to int location, add public getlocation method
 		template<>
 		bool SetUniform<glm::mat4>(const char *name, const glm::mat4 &value)
 		{
-			auto location = GetUniformLocation(name);
+			this->Use();
+			int location = GetUniformLocation(name);
 
 			if (location == -1)
 				return false;
@@ -45,13 +47,27 @@ namespace gl {
 		template<>
 		bool SetUniform<glm::vec4>(const char *name, const glm::vec4 &value)
 		{
-			auto location = GetUniformLocation(name);
+			this->Use();
+			int location = GetUniformLocation(name);
 
 			if (location == -1)
 				return false;
 
-			glUniform1fv(location, 4, glm::value_ptr(value));
+			GLcall(glUniform4f(location, value.r, value.g, value.b, value.a));
 
+			return true;
+		}
+
+		template<>
+		bool SetUniform<glm::vec2>(const char *name, const glm::vec2 &value)
+		{
+			this->Use();
+			int location = GetUniformLocation(name);
+
+			if (location == -1)
+				return false;
+
+			GLcall(glUniform2f(location, value.x, value.y));
 			return true;
 		}
 
