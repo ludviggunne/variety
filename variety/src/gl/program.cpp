@@ -85,7 +85,8 @@ namespace gl {
 
 		if (it == _uniformLocations.end())
 		{
-			GLint location = glGetUniformLocation(_id, name);
+			GLint location;
+			GLcall(location = glGetUniformLocation(_id, name));
 
 			if (location > -1)
 				_uniformLocations[name] = location;
