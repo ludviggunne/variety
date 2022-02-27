@@ -20,6 +20,15 @@ namespace gl {
 				case(GL_INT):   return sizeof(int);
 			}
 		}
+
+		template<typename T>
+		static VertexAttribute FromType();
+
+		template<>
+		static VertexAttribute FromType<glm::vec3>()
+		{
+			return VertexAttribute(3, GL_FLOAT);
+		}
 	};
 
 	class VertexLayout {

@@ -1,12 +1,15 @@
 #include "vertex.h"
 
+#define PushVertexAttribute(name)\
+	layout.PushAttribute(VertexAttribute::FromType<decltype(Vertex:: name)>())
+
 namespace gl {
 
 	static VertexLayout GetLayout() {
 		VertexLayout layout;
 
-		layout.PushAttribute(VertexAttribute(3, GL_FLOAT)); // position
-		layout.PushAttribute(VertexAttribute(3, GL_FLOAT)); // normal
+		PushVertexAttribute(position);
+		PushVertexAttribute(normal);
 
 		return layout;
 	}
