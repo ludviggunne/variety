@@ -7,6 +7,7 @@ namespace gl {
 
 	struct Vertex {
 		glm::vec3 position;
+		glm::vec3 normal;
 
 		static const VertexLayout layout;
 	};
