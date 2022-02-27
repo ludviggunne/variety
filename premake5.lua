@@ -9,7 +9,8 @@ workspace "variety"
     files {
         "premake5.lua",
         ".gitignore",
-        ".gitmodules"
+        ".gitmodules",
+        "variety/shaders/**.glsl"
     }
 
     startproject "variety"
