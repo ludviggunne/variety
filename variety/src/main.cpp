@@ -26,24 +26,6 @@ int main() {
 	{
 		using namespace gl;
 
-		// Render data
-		const Vertex vertices[4] = {
-			Vertex{glm::vec3(-.5f, -.5f, 0.0f)},
-			Vertex{glm::vec3(0.5f, -.5f, 0.0f)},
-			Vertex{glm::vec3(-.5f, 0.5f, 0.0f)},
-			Vertex{glm::vec3(0.5f, 0.5f, 0.0f)}
-		};
-
-		const Index indices[6] = {
-			0, 1, 2,
-			1, 2, 3
-		};
-
-		// Vertex array setup
-		VertexArray va;
-		va.VertexData(vertices, 4);
-		va.IndexData(indices, 6);
-
 		// Program setup
 		Program program;
 
@@ -66,30 +48,10 @@ int main() {
 			__debugbreak();
 		}
 
-
-		glm::vec2 pos(0.0f);
-
 		while (!glfwWindowShouldClose(window)) {
 
 			GLcall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
 			GLcall(glClear(GL_COLOR_BUFFER_BIT));
-
-			program.Use();
-			if (!program.SetUniform("uColor", glm::vec4(0.0f, 0.0f,10.0f, 1.0f))) std::cout << "Couldn't find uniform uColor\n";
-			if (!program.SetUniform("uPos", pos)) std::cout << "Couldn't find uniform uPos\n";
-
-			va.Bind();
-			va.VertexData(vertices, 4);
-			va.IndexData(indices, 6);
-
-			va.Draw(GL_TRIANGLES);
-
-			const float speed = 0.001f;
-			if (glfwGetKey(window, GLFW_KEY_UP)     == GLFW_PRESS) pos.y += speed;
-			if (glfwGetKey(window, GLFW_KEY_DOWN)   == GLFW_PRESS) pos.y -= speed;
-			if (glfwGetKey(window, GLFW_KEY_RIGHT)  == GLFW_PRESS) pos.x += speed;
-			if (glfwGetKey(window, GLFW_KEY_LEFT)   == GLFW_PRESS) pos.x -= speed;
-			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) break;
 
 			glfwSwapBuffers(window);
 			glfwPollEvents();
