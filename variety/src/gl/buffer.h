@@ -9,7 +9,7 @@ namespace gl {
 	template<typename T>
 	class Buffer : private GLName {
 	public:
-		Buffer()
+		Buffer() : _size(0)
 		{
 			GLcall(glGenBuffers(1, &_id));
 		}
@@ -24,13 +24,20 @@ namespace gl {
 			GLcall(glBindBuffer(_target, _id));
 		}
 
-		void Data(const T *data, size_t size) const 
+		void Data(const T *data, size_t size)
 		{
 			GLcall(glBufferData(_target, size * sizeof(T), data, GL_STATIC_DRAW));
+			_size = size;
+		}
+
+		size_t Size() const 
+		{ 
+			return _size; 
 		}
 
 	private:
 		static const GLenum _target;
+		size_t _size;
 	};
 
 	// Targets
