@@ -3,13 +3,17 @@
 glm::mat4 Camera::GetProjection() const
 {
 	const glm::vec3 up(0.0f, 1.0f, 0.0f);
-	glm::vec3 position = _center + glm::vec3(
-		_distance * glm::cos(_xRotation) * glm::cos(_yRotation),
-		_distance * glm::sin(_xRotation),
-		_distance * glm::cos(_xRotation) * glm::sin(_yRotation)
-	);
 
-	return glm::lookAt(position, _center, up);
+	return glm::lookAt(GetPosition(), _center, up);
+}
+
+glm::vec3 Camera::GetPosition() const
+{
+	glm::vec3 position(0.0f, 0.0f, _distance);
+	position = glm::rotate(position, _yRotation, glm::vec3(1.0f, 0.0f, 0.0f));
+	position = glm::rotate(position, _xRotation, glm::vec3(0.0f, 1.0f, 0.0f));
+
+	return position;
 }
 
 void Camera::OnMousePress(const glm::vec2 mousePos, bool instance, Action action)
