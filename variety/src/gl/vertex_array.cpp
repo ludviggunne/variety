@@ -23,6 +23,10 @@ namespace gl {
 	{
 		Bind();
 		//GLcall(glDrawElements(primitive_type, _indexSize, GL_UNSIGNED_INT, 0));
+
+		// Changing to this call makes the index buffer component of the vertex array obsolete
+		// But this is the way to go as i will be creating mesh triangle by triangle, and vertices wont be reused
+		// as it would be too complicated within the dual contour algorithm
 		GLcall(glDrawArrays(GL_TRIANGLES, 0, _indexSize));
 	}
 
