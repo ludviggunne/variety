@@ -35,6 +35,12 @@ void Camera::OnMousePress(const glm::vec2 mousePos, bool instance, Action action
 	case Action::Rotation:
 		_xRotation = xRotOffset - Settings::CameraRotateSpeed * (mousePos.x - mouseOffset.x);
 		_yRotation = yRotOffset - Settings::CameraRotateSpeed * (mousePos.y - mouseOffset.y);
+
+		_yRotation = _yRotation > 
+			Settings::CameraYRotClampAngle ? 
+			Settings::CameraYRotClampAngle : (_yRotation < 
+				-Settings::CameraYRotClampAngle ? 
+				-Settings::CameraYRotClampAngle : _yRotation);
 		break;
 
 	case Action::Pan:

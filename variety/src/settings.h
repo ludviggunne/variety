@@ -13,4 +13,6 @@ namespace Settings {
 
 	extern const float CameraRotateSpeed;
 	extern const float CameraZoomSpeed;
+
+	extern const float CameraYRotClampAngle;
 };
