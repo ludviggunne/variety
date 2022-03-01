@@ -2,7 +2,7 @@
 
 namespace gl {
 
-	VertexArray::VertexArray() : _indexSize(0)
+	VertexArray::VertexArray()
 	{
 		GLcall(glGenVertexArrays(1, &_id));
 		GLcall(glBindVertexArray(_id));
@@ -30,7 +30,7 @@ namespace gl {
 		GLcall(glDrawArrays(GL_TRIANGLES, 0, _indexSize));
 	}
 
-	void VertexArray::VertexData(const Vertex *data, size_t size) const
+	void VertexArray::VertexData(const Vertex *data, size_t size)
 	{
 		_vertexBuffer.Bind();
 		_vertexBuffer.Data(data, size);
@@ -40,8 +40,6 @@ namespace gl {
 	{
 		_indexBuffer.Bind();
 		_indexBuffer.Data(data, size);
-
-		_indexSize = size;
 	}
 
 }
