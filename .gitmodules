@@ -9,4 +9,4 @@
 	url = https://github.com/ludviggunne/glm
 [submodule "extern/exprtk/exprtk"]
 	path = extern/exprtk/exprtk
-	url = https://github.com/ArashPartow/exprtk
+	url = https://github.com/ludviggunne/exprtk
