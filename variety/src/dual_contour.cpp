@@ -8,7 +8,7 @@ DualContour::~DualContour()
 		delete _vertices;
 }
 
-void DualContour::Compute(const std::string &equation)
+bool DualContour::Compute(const std::string &equation)
 {
 	std::thread(&ICompute, this, equation).detach();
 }

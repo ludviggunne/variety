@@ -25,7 +25,7 @@ public:
 	}
 	~DualContour();
 
-	void Compute(const std::string &equation);
+	bool Compute(const std::string &equation);
 
 	const std::vector<gl::Vertex> *GetVertices();
 	State GetState() const { return _state; }
