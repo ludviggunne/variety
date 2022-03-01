@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include "glm/glm.hpp"
+
 #include "gl.h"
 
 namespace gl {
