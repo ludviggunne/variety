@@ -116,5 +116,5 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 	// test ------------------------------------------------
 
 	// Finish
-	_state = State::Compute;
+	_state = State::Present;
 }
