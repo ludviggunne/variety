@@ -7,5 +7,10 @@ uniform vec3 uLightPos;
 
 void main()
 {
-    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    vec3 ray     = normalize(uLightPos - vPosition);
+    vec3 nNormal = normalize(vNormal);
+
+    float lum = clamp(dot(ray, nNormal), .2, 1);
+  
+    gl_FragColor = lum * vec4(1.0, 0.0, 0.0, 1.0);
 }
