@@ -8,14 +8,15 @@ class Camera {
 public:
 	enum class Action { Rotation, Pan };
 	Camera() : 
-		_center(Settings::CameraInitCenter),
+		_center(   Settings::CameraInitCenter),
 		_xRotation(Settings::CameraInitXRotation), 
 		_yRotation(Settings::CameraInitYRotation),
-		_distance (Settings::CameraInitDistance)
+		_distance( Settings::CameraInitDistance)
 	{
 	}
 
 	glm::mat4 GetProjection() const;
+	glm::vec3 GetPosition() const;
 
 	void OnMousePress(const glm::vec2 mousePos, bool instance, Action action);
 	void OnScroll(double offset);
