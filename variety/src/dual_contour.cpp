@@ -29,7 +29,31 @@ DualContour::~DualContour()
 
 bool DualContour::Compute(const std::string &equation)
 {
-	std::thread(&ICompute, this, equation).detach();
+	// Setup expression
+	exprtk::expression<float> expression;
+	expression.register_symbol_table(_symbolTable);
+
+	// Convert equation to form f(x, y, z) = 0
+	std::string func_str;
+
+	auto equal_sign_it = equation.find('=');
+	if (equal_sign_it == equation.size())
+		return false; // No equal sign
+
+	func_str += equation.substr(0, equal_sign_it);
+	func_str += "-(";
+	func_str += equation.substr(equal_sign_it + 1, std::string::npos);
+	func_str += ")";
+
+	// Compile and return status on fail
+	if (!exprtk::parser<float>().compile(func_str, expression))
+		return false;
+
+	// Dispatch computation
+	std::thread(&DualContour::ICompute, this, expression, 
+		std::ref(_varX), std::ref(_varY), std::ref(_varZ)).detach();
+
+	return true;
 }
 
 const std::vector<gl::Vertex> *DualContour::GetVertices()
