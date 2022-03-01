@@ -56,7 +56,7 @@ bool DualContour::Compute(const std::string &equation)
 	return true;
 }
 
-const std::vector<gl::Vertex> *DualContour::GetVertices()
+std::vector<gl::Vertex> const *DualContour::GetVertices()
 {
 	if (_state == State::Present) {
 		_state = State::Standby;

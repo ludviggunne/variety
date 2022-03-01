@@ -13,7 +13,7 @@ public:
 
 	bool Compute(const std::string &equation);
 
-	const std::vector<gl::Vertex> *GetVertices();
+	std::vector<gl::Vertex> const *GetVertices();
 	State GetState() const { return _state; }
 	float GetProgress() const { return _progress; }
 
