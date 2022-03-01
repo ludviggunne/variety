@@ -43,7 +43,8 @@ workspace "variety"
             
             "extern/glfw/include",
 
-            "extern/glm"
+            "extern/glm",
+            "extern/exprtk"
         }
 
         libdirs {
