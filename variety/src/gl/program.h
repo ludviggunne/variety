@@ -59,6 +59,20 @@ namespace gl {
 		}
 
 		template<>
+		bool SetUniform<glm::vec3>(const char *name, const glm::vec3 &value)
+		{
+			this->Use();
+			int location = GetUniformLocation(name);
+
+			if (location == -1)
+				return false;
+
+			GLcall(glUniform3f(location, value.x, value.y, value.z));
+
+			return true;
+		}
+
+		template<>
 		bool SetUniform<glm::vec2>(const char *name, const glm::vec2 &value)
 		{
 			this->Use();
