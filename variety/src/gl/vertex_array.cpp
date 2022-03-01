@@ -22,7 +22,8 @@ namespace gl {
 	void VertexArray::Draw(GLenum primitive_type) const
 	{
 		Bind();
-		GLcall(glDrawElements(primitive_type, _indexSize, GL_UNSIGNED_INT, 0));
+		//GLcall(glDrawElements(primitive_type, _indexSize, GL_UNSIGNED_INT, 0));
+		GLcall(glDrawArrays(GL_TRIANGLES, 0, _indexSize));
 	}
 
 	void VertexArray::VertexData(const Vertex *data, size_t size) const
