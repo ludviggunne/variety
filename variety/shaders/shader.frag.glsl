@@ -3,7 +3,7 @@
 in vec3 vPosition;
 in vec3 vNormal;
 
-uniform vec3 lightPos;
+uniform vec3 uLightPos;
 
 void main()
 {
