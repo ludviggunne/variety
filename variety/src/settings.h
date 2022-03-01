@@ -4,7 +4,6 @@
 
 namespace Settings {
 
-// Initial parameters
 	// Camera
 	extern const float CameraInitXRotation;
 	extern const float CameraInitYRotation;
