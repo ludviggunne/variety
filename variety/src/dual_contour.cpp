@@ -16,9 +16,10 @@ DualContour::DualContour() :
 	_state(State::Standby),
 	_vertices(nullptr)
 {
+	// Names switched because so z is up
 	_symbolTable.add_variable("x", _varX);
-	_symbolTable.add_variable("y", _varY);
-	_symbolTable.add_variable("z", _varZ);
+	_symbolTable.add_variable("z", _varY);
+	_symbolTable.add_variable("y", _varZ);
 }
 
 DualContour::~DualContour()
