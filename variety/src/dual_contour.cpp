@@ -88,7 +88,32 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 	else
 		_vertices = new std::vector<gl::Vertex>;
 
-	// DO SOME MAGIC
+	// test ------------------------------------------------
+	
+	for (_varX = _xMin; _varX < _xMax; _varX += stepSize) {
+		for (_varY = _yMin; _varY < _yMax; _varY += stepSize) {
+			for (_varZ = _zMin; _varZ < _zMax; _varZ += stepSize) {
+				if (expr.value() < 0)
+				{
+					glm::vec3 normal(0.0f, 0.0f, 1.0f);
+					_vertices->push_back(gl::Vertex{
+						glm::vec3(_varX, _varY, _varZ),
+						normal
+					});
+					_vertices->push_back(gl::Vertex{
+						glm::vec3(_varX + stepSize, _varY, _varZ),
+						normal
+					});
+					_vertices->push_back(gl::Vertex{
+						glm::vec3(_varX, _varY + _stepSize, _varZ),
+						normal
+					});
+				}
+			}
+		}
+	}
+	
+	// test ------------------------------------------------
 
 	// Finish
 	_state = State::Compute;
