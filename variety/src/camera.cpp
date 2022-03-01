@@ -33,8 +33,8 @@ void Camera::OnMousePress(const glm::vec2 mousePos, bool instance, Action action
 
 	switch (static_action) {
 	case Action::Rotation:
-		_xRotation = xRotOffset + Settings::CameraRotateSpeed * (mousePos.x - mouseOffset.x);
-		_yRotation = yRotOffset + Settings::CameraRotateSpeed * (mousePos.y - mouseOffset.y);
+		_xRotation = xRotOffset - Settings::CameraRotateSpeed * (mousePos.x - mouseOffset.x);
+		_yRotation = yRotOffset - Settings::CameraRotateSpeed * (mousePos.y - mouseOffset.y);
 		break;
 
 	case Action::Pan:
@@ -45,7 +45,7 @@ void Camera::OnMousePress(const glm::vec2 mousePos, bool instance, Action action
 
 void Camera::OnScroll(double offset)
 {
-	_distance += offset * Settings::CameraZoomSpeed;
+	_distance -= offset * Settings::CameraZoomSpeed;
 	if (_distance < 0)
-		_distance -= Settings::CameraZoomSpeed;
+		_distance += Settings::CameraZoomSpeed;
 }
