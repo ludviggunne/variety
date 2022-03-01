@@ -2,6 +2,25 @@
 
 #include <thread>
 
+DualContour::DualContour() :
+	xMin(Settings::DualInitXMin),
+	yMin(Settings::DualInitYMin),
+	zMin(Settings::DualInitZMin),
+
+	xMax(Settings::DualInitXMax),
+	yMax(Settings::DualInitYMax),
+	zMax(Settings::DualInitZMax),
+
+	stepSize(Settings::DualInitStepSize),
+	_progress(0.0f),
+	_state(State::Standby),
+	_vertices(nullptr)
+{
+	_symbolTable.add_variable("x", _varX);
+	_symbolTable.add_variable("y", _varY);
+	_symbolTable.add_variable("z", _varZ);
+}
+
 DualContour::~DualContour()
 {
 	if (_vertices)

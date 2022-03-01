@@ -8,21 +8,7 @@ public:
 	enum class State { Standby, Compute, Present };
 
 public:
-	DualContour() :
-		xMin(Settings::DualInitXMin), 
-		yMin(Settings::DualInitYMin), 
-		zMin(Settings::DualInitZMin),
-
-		xMax(Settings::DualInitXMax),
-		yMax(Settings::DualInitYMax),
-		zMax(Settings::DualInitZMax),
-
-		stepSize(Settings::DualInitStepSize),
-		_progress(0.0f),
-		_state(State::Standby),
-		_vertices(nullptr)
-	{
-	}
+	DualContour();
 	~DualContour();
 
 	bool Compute(const std::string &equation);
