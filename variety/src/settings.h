@@ -14,4 +14,17 @@ namespace Settings {
 	extern const float CameraZoomSpeed;
 
 	extern const float CameraYRotClampAngle;
+
+	// Algorithm
+	extern const float DualInitXMin;
+	extern const float DualInitYMin;
+	extern const float DualInitZMin;
+
+	extern const float DualInitXMax;
+	extern const float DualInitYMax;
+	extern const float DualInitZMax;
+
+	extern const float DualInitStepSize;
+
+	extern const char *DualDefaultEquation;
 };

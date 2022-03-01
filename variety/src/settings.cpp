@@ -12,4 +12,17 @@ namespace Settings {
 	const float CameraZoomSpeed   = 1.0f;
 
 	const float CameraYRotClampAngle = 70.0f;
+
+	// Algorithm
+	const float DualInitXMin = -1.0f;
+	const float DualInitYMin = -1.0f;
+	const float DualInitZMin = -1.0f;
+
+	const float DualInitXMax = 1.0f;
+	const float DualInitYMax = 1.0f;
+	const float DualInitZMax = 1.0f;
+
+	const float DualInitStepSize = .01f;
+
+	extern const char *DualDefaultEquation = "x*x + y*y = z";
 }
