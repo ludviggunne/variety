@@ -3,6 +3,8 @@
 #include "settings.h"
 #include "gl/vertex.h"
 
+#include "exprtk/exprtk.hpp"
+
 class DualContour {
 public:
 	enum class State { Standby, Compute, Present };
@@ -18,7 +20,8 @@ public:
 	float GetProgress() const { return _progress; }
 
 private:
-	void ICompute(const std::string &equation);
+	void ICompute(const exprtk::expression<float> &expr, 
+		float &var_x, float &var_y, float &var_z);
 
 public:
 	float xMin;
@@ -35,4 +38,10 @@ private:
 	float _progress;
 	State _state;
 	std::vector<gl::Vertex> *_vertices;
+
+	// EXPRTK
+	float _varX;
+	float _varY;
+	float _varZ;
+	exprtk::symbol_table<float> _symbolTable;
 };

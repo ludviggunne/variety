@@ -66,7 +66,8 @@ std::vector<gl::Vertex> const *DualContour::GetVertices()
 	return nullptr;
 }
 
-void DualContour::ICompute(const std::string &equation)
+void DualContour::ICompute(const exprtk::expression<float> &expr, 
+	float &var_x, float &var_y, float &var_z)
 {
 	_state = State::Compute;
 
