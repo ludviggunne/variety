@@ -26,6 +26,7 @@ int main() {
 	glfwInit();
 
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+	glfwWindowHint(GLFW_SAMPLES, 8);
 	GLFWwindow *window = glfwCreateWindow(800, 800, "Test", NULL, NULL);
 
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -74,18 +75,18 @@ int main() {
 		float t = (1.0f + sqrtf(5.0f)) / 2.0f;
 
 		glm::vec3 positions[] = {
-			glm::vec3{-1,  t,  0},
-			glm::vec3{ 1,  t,  0},
-			glm::vec3{-1, -t,  0},
-			glm::vec3{ 1, -t,  0},
-			glm::vec3{ 0, -1,  t},
-			glm::vec3{ 0,  1,  t},
-			glm::vec3{ 0, -1, -t},
-			glm::vec3{ 0,  1, -t},
-			glm::vec3{ t,  0, -1},
-			glm::vec3{ t,  0,  1},
-			glm::vec3{-t,  0, -1},
-			glm::vec3{-t,  0,  1}
+			glm::vec3{ -1,  t,  0 },
+			glm::vec3{  1,  t,  0 },
+			glm::vec3{ -1, -t,  0 },
+			glm::vec3{  1, -t,  0 },
+			glm::vec3{  0, -1,  t },
+			glm::vec3{  0,  1,  t },
+			glm::vec3{  0, -1, -t },
+			glm::vec3{  0,  1, -t },
+			glm::vec3{  t,  0, -1 },
+			glm::vec3{  t,  0,  1 },
+			glm::vec3{ -t,  0, -1 },
+			glm::vec3{ -t,  0,  1 }
 		};
 
 		std::vector<Vertex> verts;
@@ -122,9 +123,9 @@ int main() {
 		auto subdivide = [&verts, &va]() {
 			std::vector<Vertex> new_verts;
 			for (int i = 0; i < verts.size(); i += 3) {
-				auto p0 = glm::normalize(verts[i + 0].position);
-				auto p1 = glm::normalize(verts[i + 1].position);
-				auto p2 = glm::normalize(verts[i + 2].position);
+				auto p0 = verts[i + 0].position;
+				auto p1 = verts[i + 1].position;
+				auto p2 = verts[i + 2].position;
 
 				auto m0 = glm::normalize(p0 + p1);
 				auto m1 = glm::normalize(p1 + p2);
@@ -141,6 +142,7 @@ int main() {
 		};
 
 		GLcall(glEnable(GL_DEPTH_TEST));
+		GLcall(glEnable(GL_MULTISAMPLE));
 		GLcall(glViewport(0, 0, 800, 800));
 
 		bool mousePressed = false;
