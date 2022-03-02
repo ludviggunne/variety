@@ -59,7 +59,7 @@ bool DualContour::Compute(const std::string &equation)
 
 std::vector<gl::Vertex> const *DualContour::GetVertices()
 {
-	if (_state == State::Present) {
+	if (_state == State::Present && !_vertices->empty()) {
 		_state = State::Standby;
 		return _vertices;
 	}
