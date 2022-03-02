@@ -45,7 +45,7 @@ workspace "variety"
             "%{prj.name}/include",
 
             "extern/glad/include",
-            "extern/imgui",
+            "extern/imgui/imgui",
             
             "extern/glfw/include",
 
