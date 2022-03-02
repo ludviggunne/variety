@@ -32,7 +32,13 @@ workspace "variety"
             "%{prj.name}/src/**.h",
 
             "extern/glad/src/glad.c",
-            "extern/imgui/*.cpp"
+            "extern/imgui/imgui/imgui.cpp",
+            "extern/imgui/imgui/imgui_demo.cpp",
+            "extern/imgui/imgui/imgui_draw.cpp",
+            "extern/imgui/imgui/imgui_tables.cpp",
+            "extern/imgui/imgui/imgui_widgets.cpp",
+            "extern/imgui/imgui/backends/imgui_impl_glfw.cpp",
+            "extern/imgui/imgui/backends/imgui_impl_opengl3.cpp"
         }
 
         includedirs {
