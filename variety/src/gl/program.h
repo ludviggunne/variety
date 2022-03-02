@@ -31,6 +31,20 @@ namespace gl {
 		// (Vtodo): add more uniform setters
 		// (Vtodo): change name parameter to int location, add public getlocation method
 		template<>
+		bool SetUniform<float>(const char *name, const float &value)
+		{
+			this->Use();
+			int location = GetUniformLocation(name);
+
+			if (location == -1)
+				return false;
+
+			GLcall(glUniform1f(location, value));
+
+			return true;
+		}
+		
+		template<>
 		bool SetUniform<glm::mat4>(const char *name, const glm::mat4 &value)
 		{
 			this->Use();
