@@ -24,14 +24,18 @@ private:
 		float &var_x, float &var_y, float &var_z);
 
 public:
-	float xMin;
-	float yMin;
-	float zMin;
-
-	float xMax;
-	float yMax;
-	float zMax;
-
+	union {
+		struct {
+			float xMin, yMin, zMin;
+		};
+		float min[3];
+	};
+	union {
+		struct {
+			float xMax, yMax, zMax;
+		};
+		float max[3];
+	};
 	float stepSize;
 
 private:
