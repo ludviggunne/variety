@@ -24,5 +24,21 @@ namespace Settings {
 
 	const float DualInitStepSize = .01f;
 
-	extern const char *DualDefaultEquation = "x*x + y*y = z";
+	const char *DualDefaultEquation = "x*x + y*y = z";
+
+	// Window
+	const int WindowInitWidth = 800;
+	const int WindowInitHeight = 800;
+
+
+	// Perspective
+	const float PerspectiveFOV = 45.0f;
+
+
+	// Theme
+	const glm::vec3 BackgroundColor = glm::vec3(0.1f, 0.1f, 0.1f);
+	const glm::vec3 LightColor = glm::vec3(1.0f, 1.0f, 0.8f);
+	const glm::vec3 GraphColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	const glm::vec3 AmbientColor = glm::vec3(0.7f, 0.7f, 1.0f);
+	const float     AmbientStrength = 0.1f;
 }

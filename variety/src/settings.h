@@ -27,4 +27,19 @@ namespace Settings {
 	extern const float DualInitStepSize;
 
 	extern const char *DualDefaultEquation;
+
+	// Window
+	extern const int WindowInitWidth;
+	extern const int WindowInitHeight;
+
+	// Perspective
+	extern const float PerspectiveFOV;
+
+
+	// Theme
+	extern const glm::vec3 BackgroundColor;
+	extern const glm::vec3 LightColor;
+	extern const glm::vec3 GraphColor;
+	extern const glm::vec3 AmbientColor;
+	extern const float     AmbientStrength;
 };
