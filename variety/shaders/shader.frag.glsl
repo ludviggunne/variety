@@ -13,8 +13,9 @@ void main()
     vec3 ray     = normalize(uLightPos - vPosition);
     vec3 nNormal = normalize(vNormal);
 
-    float lum = clamp(dot(ray, nNormal), 0, 1);
+    float lum = abs(dot(ray, nNormal));
   
     gl_FragColor = clamp(lum * vec4(uLightColor, 1.0f) * vec4(1.0, 1.0, 1.0, 1.0) 
         + uAmbientStrength * vec4(uAmbientColor, 1.0), 0, 1);
+    gl_FragColor *= abs(vPosition);
 }
