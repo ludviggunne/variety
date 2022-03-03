@@ -205,7 +205,6 @@ void Application::ImguiWindow()
 	static bool parseFailed = false;
 	ImGui::Begin("Controls");
 
-	ImGui::Text("Bounds and stepsize");
 	ImGui::DragFloat3("Min", _dualContour.min, 0.01f, -5.0f, -.5f, "%.1f", 1.0f);
 	ImGui::DragFloat3("Max", _dualContour.max, 0.01f, .5f, 5.0f, "%.1f", 1.0f);
 	ImGui::DragInt("Resolution", &_dualContour.resolution, 0.2f, 8, 256);
