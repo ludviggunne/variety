@@ -14,13 +14,13 @@ namespace Settings {
 	const float CameraYRotClampAngle = 70.0f;
 
 	// Algorithm
-	const float DualInitXMin = -1.0f;
-	const float DualInitYMin = -1.0f;
-	const float DualInitZMin = -1.0f;
+	const float DualInitXMin = -2.0f;
+	const float DualInitYMin = -2.0f;
+	const float DualInitZMin = -2.0f;
 
-	const float DualInitXMax = 1.0f;
-	const float DualInitYMax = 1.0f;
-	const float DualInitZMax = 1.0f;
+	const float DualInitXMax = 2.0f;
+	const float DualInitYMax = 2.0f;
+	const float DualInitZMax = 2.0f;
 
 	const int DualInitResolution = 64;
 
