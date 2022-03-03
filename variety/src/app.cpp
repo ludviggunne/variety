@@ -202,6 +202,7 @@ bool Application::ImguiInit()
 
 void Application::ImguiWindow()
 {
+	static bool parseFailed = false;
 	ImGui::Begin("Controls");
 
 	ImGui::Text("Bounds and stepsize");
@@ -212,7 +213,13 @@ void Application::ImguiWindow()
 	ImGui::InputText("Equation", _equationBuffer, EQBUFSIZE);
 
 	if (ImGui::Button("Generate mesh")) {
-		if (!_dualContour.Compute(_equationBuffer)) /* POP UP WINDOW */;
+		parseFailed = !_dualContour.Compute(_equationBuffer);
+	}
+
+	if (parseFailed) {
+		ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 0, 0, 255));
+		ImGui::Text("Failed to parse expression.");
+		ImGui::PopStyleColor();
 	}
 
 	if (_dualContour.GetState() == DualContour::State::Compute) {
