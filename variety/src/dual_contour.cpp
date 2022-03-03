@@ -129,7 +129,7 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 				gl::Vertex v0, v1, v2, v3;
 
 				auto halfStep = stepSize / 2.0f;
-			
+
 				// Horizontal edge
 				normal = glm::vec3(1.0f, 0.0f, 0.0f);
 				test0 = samples[(i - 1) + xRes * (j + yRes * k)] > 0;
@@ -233,7 +233,7 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 				// Forward edge
 				normal = glm::vec3(0.0f, 0.0f, 1.0f);
 				test0 = samples[i + xRes * (j + yRes * (k - 1))] > 0;
-				test1 = samples[i + xRes * (j + yRes *  k     )] > 0;
+				test1 = samples[i + xRes * (j + yRes *  k    )] > 0;
 
 				if (test0 ^ test1) {
 					if (test0) normal *= -1.0f;
