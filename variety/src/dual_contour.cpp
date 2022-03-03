@@ -71,6 +71,7 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 	float &var_x, float &var_y, float &var_z)
 {
 	_state = State::Compute;
+	_progress = 0.0f;
 
 	// Copy parameters
 	auto _xMin = xMin;
@@ -91,9 +92,12 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 
 	// test ------------------------------------------------
 	
-	for (_varX = _xMin; _varX < _xMax; _varX += stepSize) {
-		for (_varY = _yMin; _varY < _yMax; _varY += stepSize) {
-			for (_varZ = _zMin; _varZ < _zMax; _varZ += stepSize) {
+	for (_varX = _xMin; _varX < _xMax; _varX += _stepSize) {
+
+		_progress = (_varX - _xMin) / (_xMax - _xMin);
+
+		for (_varY = _yMin; _varY < _yMax; _varY += _stepSize) {
+			for (_varZ = _zMin; _varZ < _zMax; _varZ += _stepSize) {
 				if (expr.value() < 0)
 				{
 					glm::vec3 normal(0.0f, 0.0f, 1.0f);
