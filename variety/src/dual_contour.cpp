@@ -73,7 +73,7 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 	_state = State::Compute;
 	_progress = 0.0f;
 
-	// Copy parameters
+	// Lock parameters
 	auto _xMin = xMin;
 	auto _yMin = yMin;
 	auto _zMin = zMin;
