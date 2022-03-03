@@ -223,7 +223,7 @@ void Application::ImguiWindow()
 	}
 
 	if (_dualContour.GetState() == DualContour::State::Compute) {
-		ImGui::ProgressBar(.9f, { -1, 0 }, "");
+		ImGui::ProgressBar(_dualContour.GetProgress(), { -1, 0 }, _dualContour.GetProgressString());
 	}
 
 	ImGui::End();
