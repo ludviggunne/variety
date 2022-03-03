@@ -78,7 +78,6 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 	float &var_x, float &var_y, float &var_z)
 {
 	_state = State::Compute;
-	_progress = 0.0f;
 
 	// Lock parameters
 	auto _xMin = xMin;
@@ -105,18 +104,23 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 	auto *samples = new float[xRes * yRes * zRes];
 
 	// Sample function
+	_progress = 0.0f;
 	_progressStr = _psSampling;
 	int i, j, k;
-	for (        i = 0, _varX = _xMin; i < xRes; i++, _varX += stepSize)
+	for (        i = 0, _varX = _xMin; i < xRes; i++, _varX += stepSize) {
+		_progress = i / static_cast<float>(xRes);
 		for (    j = 0, _varY = _yMin; j < yRes; j++, _varY += stepSize)
 			for (k = 0, _varZ = _zMin; k < zRes; k++, _varZ += stepSize)
 				samples[i + xRes * (j + yRes * k)] = expr.value();
+	}
 
 	// Add faces
 	// Start one step ahead since we are considering edges
+	_progress = 0.0f;
 	_progressStr = _psBuilding;
 	float x, y, z;
-	for (        i = 1, x = _xMin + stepSize; i < xRes; i++, x += stepSize)
+	for (        i = 1, x = _xMin + stepSize; i < xRes; i++, x += stepSize) {
+		_progress = i / static_cast<float>(xRes);
 		for (    j = 1, y = _yMin + stepSize; j < yRes; j++, y += stepSize)
 			for (k = 1, z = _zMin + stepSize; k < zRes; k++, z += stepSize) {
 
@@ -276,6 +280,7 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 					_vertices->push_back(v3);
 				}
 			}
+	}
 
 	// Finish
 	_state = State::Present;
