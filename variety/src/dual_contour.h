@@ -36,7 +36,7 @@ public:
 		};
 		float max[3];
 	};
-	float stepSize;
+	int resolution;
 
 private:
 	float _progress;

@@ -22,7 +22,7 @@ namespace Settings {
 	const float DualInitYMax = 1.0f;
 	const float DualInitZMax = 1.0f;
 
-	const float DualInitStepSize = .01f;
+	const int DualInitResolution = 64;
 
 	const char *DualDefaultEquation = "x*x + y*y = z";
 

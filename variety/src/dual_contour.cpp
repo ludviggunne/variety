@@ -11,7 +11,7 @@ DualContour::DualContour() :
 	yMax(Settings::DualInitYMax),
 	zMax(Settings::DualInitZMax),
 
-	stepSize(Settings::DualInitStepSize),
+	resolution(Settings::DualInitResolution),
 	_progress(0.0f),
 	_state(State::Standby),
 	_vertices(nullptr)

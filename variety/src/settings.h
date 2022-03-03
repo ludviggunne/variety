@@ -24,7 +24,7 @@ namespace Settings {
 	extern const float DualInitYMax;
 	extern const float DualInitZMax;
 
-	extern const float DualInitStepSize;
+	extern const int DualInitResolution;
 
 	extern const char *DualDefaultEquation;
 
