@@ -18,6 +18,7 @@ public:
 	std::vector<gl::Vertex> const *GetVertices();
 	State GetState() const { return _state; }
 	float GetProgress() const { return _progress; }
+	const char *GetProgressString() const { return _progressStr; }
 
 private:
 	void ICompute(const exprtk::expression<float> &expr, 
@@ -40,6 +41,7 @@ public:
 
 private:
 	float _progress;
+	const char *_progressStr;
 	State _state;
 	std::vector<gl::Vertex> *_vertices;
 
@@ -48,4 +50,10 @@ private:
 	float _varY;
 	float _varZ;
 	exprtk::symbol_table<float> _symbolTable;
+
+private:
+	// Progress strings
+	static const char *_psNone;
+	static const char *_psSampling;
+	static const char *_psBuilding;
 };

@@ -4,6 +4,10 @@
 
 #include "gl/misc.h"
 
+const char *DualContour::_psNone = "";
+const char *DualContour::_psSampling = "Sampling";
+const char *DualContour::_psBuilding = "Building";
+
 DualContour::DualContour() :
 	xMin(Settings::DualInitXMin),
 	yMin(Settings::DualInitYMin),
@@ -15,6 +19,7 @@ DualContour::DualContour() :
 
 	resolution(Settings::DualInitResolution),
 	_progress(0.0f),
+	_progressStr(_psNone),
 	_state(State::Standby),
 	_vertices(nullptr)
 {
@@ -100,6 +105,7 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 	auto *samples = new float[xRes * yRes * zRes];
 
 	// Sample function
+	_progressStr = _psSampling;
 	int i, j, k;
 	for (        i = 0, _varX = _xMin; i < xRes; i++, _varX += stepSize)
 		for (    j = 0, _varY = _yMin; j < yRes; j++, _varY += stepSize)
@@ -108,6 +114,7 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 
 	// Add faces
 	// Start one step ahead since we are considering edges
+	_progressStr = _psBuilding;
 	float x, y, z;
 	for (        i = 1, x = _xMin + stepSize; i < xRes; i++, x += stepSize)
 		for (    j = 1, y = _yMin + stepSize; j < yRes; j++, y += stepSize)
