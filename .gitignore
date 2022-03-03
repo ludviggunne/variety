@@ -9,3 +9,4 @@ lib/
 *.vcxproj.user
 *.vcxproj.filters
 *.sln
+*.ini
