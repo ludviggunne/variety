@@ -21,6 +21,8 @@ Application::Application()
 	strcpy(_equationBuffer, Settings::DualDefaultEquation);
 }
 
+
+
 Application::~Application()
 {
 	delete _vertexArray;
@@ -28,6 +30,8 @@ Application::~Application()
 
 	glfwTerminate();
 }
+
+
 
 void Application::Run()
 {
@@ -95,6 +99,8 @@ void Application::Run()
 	}
 }
 
+
+
 bool Application::WindowInit()
 {
 	// Init
@@ -123,6 +129,8 @@ bool Application::WindowInit()
 
 	return true;
 }
+
+
 
 bool Application::GLInit()
 {
@@ -174,6 +182,8 @@ bool Application::GLInit()
 	return true;
 }
 
+
+
 bool Application::ImguiInit()
 {
 	// Init
@@ -187,6 +197,8 @@ bool Application::ImguiInit()
 
 	return true;
 }
+
+
 
 void Application::ImguiWindow()
 {
@@ -210,6 +222,8 @@ void Application::ImguiWindow()
 	ImGui::End();
 }
 
+
+
 void Application::ResizeCallback(GLFWwindow *window, int width, int height)
 {
 	auto _this = (Application *)glfwGetWindowUserPointer(window);
@@ -223,6 +237,8 @@ void Application::ResizeCallback(GLFWwindow *window, int width, int height)
 		static_cast<float>(width) / static_cast<float>(height),
 		0.01f, 100.0f));
 }
+
+
 
 void Application::ScrollCallback(GLFWwindow *window, double xoffset, double yoffset)
 {
