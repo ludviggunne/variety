@@ -2,6 +2,8 @@
 
 #include <thread>
 
+#include "gl/misc.h"
+
 DualContour::DualContour() :
 	xMin(Settings::DualInitXMin),
 	yMin(Settings::DualInitYMin),
@@ -82,7 +84,7 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 	auto _yMax = yMax;
 	auto _zMax = zMax;
 
-	auto _stepSize = stepSize;
+	auto xRes = resolution;
 
 	// Reset vertices
 	if (_vertices)
@@ -90,35 +92,183 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 	else
 		_vertices = new std::vector<gl::Vertex>;
 
-	// test ------------------------------------------------
-	
-	for (_varX = _xMin; _varX < _xMax; _varX += _stepSize) {
+	// Find sample box y and z dimensions
+	auto stepSize = (_xMax - _xMin) / xRes;
+	auto yRes = static_cast<int> ((_yMax - _yMin) / stepSize);
+	auto zRes = static_cast<int> ((_zMax - _zMin) / stepSize);
 
-		_progress = (_varX - _xMin) / (_xMax - _xMin);
+	auto *samples = new float[xRes * yRes * zRes];
 
-		for (_varY = _yMin; _varY < _yMax; _varY += _stepSize) {
-			for (_varZ = _zMin; _varZ < _zMax; _varZ += _stepSize) {
-				if (expr.value() < 0)
-				{
-					glm::vec3 normal(0.0f, 0.0f, 1.0f);
-					_vertices->push_back(gl::Vertex{
-						glm::vec3(_varX, _varY, _varZ),
-						normal
-					});
-					_vertices->push_back(gl::Vertex{
-						glm::vec3(_varX + stepSize, _varY, _varZ),
-						normal
-					});
-					_vertices->push_back(gl::Vertex{
-						glm::vec3(_varX, _varY + _stepSize, _varZ),
-						normal
-					});
+	// Sample function
+	int i, j, k;
+	for (        i = 0, _varX = _xMin; i < xRes; i++, _varX += stepSize)
+		for (    j = 0, _varY = _yMin; j < yRes; j++, _varY += stepSize)
+			for (k = 0, _varZ = _zMin; k < zRes; k++, _varZ += stepSize)
+				samples[i + xRes * (j + yRes * k)] = expr.value();
+
+	// Add faces
+	// Start one step ahead since we are considering edges
+	float x, y, z;
+	for (        i = 1, x = _xMin + stepSize; i < xRes; i++, x += stepSize)
+		for (    j = 1, y = _yMin + stepSize; j < yRes; j++, y += stepSize)
+			for (k = 1, z = _zMin + stepSize; k < zRes; k++, z += stepSize) {
+
+				bool test0, test1;
+				glm::vec3 normal;
+				gl::Vertex v0, v1, v2, v3;
+
+				auto halfStep = stepSize / 2.0f;
+			
+				// Horizontal edge
+				normal = glm::vec3(1.0f, 0.0f, 0.0f);
+				test0 = samples[(i - 1) + xRes * (j + yRes * k)] > 0;
+				test1 = samples[ i      + xRes * (j + yRes * k)] > 0;
+
+				if (test0 ^ test1) {
+					if (test0) normal *= -1.0f;
+
+					// Find vertices
+					v0 = gl::Vertex{
+						glm::vec3(
+							x - halfStep,
+							y - halfStep,
+							z - halfStep
+						),
+						normal };
+
+					v1 = gl::Vertex{
+						glm::vec3(
+							x - halfStep,
+							y + halfStep,
+							z - halfStep
+						),
+						normal };
+
+					v2 = gl::Vertex{
+						glm::vec3(
+							x - halfStep,
+							y - halfStep,
+							z + halfStep
+						),
+						normal };
+
+					v3 = gl::Vertex{
+						glm::vec3(
+							x - halfStep,
+							y + halfStep,
+							z + halfStep
+						),
+						normal };
+
+					_vertices->push_back(v0);
+					_vertices->push_back(v1);
+					_vertices->push_back(v2);
+
+					_vertices->push_back(v1);
+					_vertices->push_back(v2);
+					_vertices->push_back(v3);
+				}
+
+				// Vertical edge
+				normal = glm::vec3(0.0f, 1.0f, 0.0f);
+				test0 = samples[i + xRes * ((j - 1) + yRes * k)] > 0;
+				test1 = samples[i + xRes * ( j      + yRes * k)] > 0;
+
+				if (test0 ^ test1) {
+					if (test0) normal *= -1.0f;
+
+					// Find vertices
+					v0 = gl::Vertex{
+						glm::vec3(
+							x - halfStep,
+							y - halfStep,
+							z - halfStep
+						),
+						normal };
+
+					v1 = gl::Vertex{
+						glm::vec3(
+							x + halfStep,
+							y - halfStep,
+							z - halfStep
+						),
+						normal };
+
+					v2 = gl::Vertex{
+						glm::vec3(
+							x - halfStep,
+							y - halfStep,
+							z + halfStep
+						),
+						normal };
+
+					v3 = gl::Vertex{
+						glm::vec3(
+							x + halfStep,
+							y - halfStep,
+							z + halfStep
+						),
+						normal };
+
+					_vertices->push_back(v0);
+					_vertices->push_back(v1);
+					_vertices->push_back(v2);
+
+					_vertices->push_back(v1);
+					_vertices->push_back(v2);
+					_vertices->push_back(v3);
+				}
+
+				// Forward edge
+				normal = glm::vec3(0.0f, 0.0f, 1.0f);
+				test0 = samples[i + xRes * (j + yRes * (k - 1))] > 0;
+				test1 = samples[i + xRes * (j + yRes *  k     )] > 0;
+
+				if (test0 ^ test1) {
+					if (test0) normal *= -1.0f;
+
+					// Find vertices
+					v0 = gl::Vertex{
+						glm::vec3(
+							x - halfStep,
+							y - halfStep,
+							z - halfStep
+						),
+						normal };
+
+					v1 = gl::Vertex{
+						glm::vec3(
+							x + halfStep,
+							y - halfStep,
+							z - halfStep
+						),
+						normal };
+
+					v2 = gl::Vertex{
+						glm::vec3(
+							x - halfStep,
+							y + halfStep,
+							z - halfStep
+						),
+						normal };
+
+					v3 = gl::Vertex{
+						glm::vec3(
+							x + halfStep,
+							y + halfStep,
+							z - halfStep
+						),
+						normal };
+
+					_vertices->push_back(v0);
+					_vertices->push_back(v1);
+					_vertices->push_back(v2);
+
+					_vertices->push_back(v1);
+					_vertices->push_back(v2);
+					_vertices->push_back(v3);
 				}
 			}
-		}
-	}
-	
-	// test ------------------------------------------------
 
 	// Finish
 	_state = State::Present;
