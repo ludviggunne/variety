@@ -243,5 +243,9 @@ void Application::ResizeCallback(GLFWwindow *window, int width, int height)
 void Application::ScrollCallback(GLFWwindow *window, double xoffset, double yoffset)
 {
 	auto _this = (Application *)glfwGetWindowUserPointer(window);
+
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		yoffset *= 0.5;
+
 	_this->_camera.OnScroll(yoffset);
 }
