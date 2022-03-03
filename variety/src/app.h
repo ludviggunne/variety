@@ -8,7 +8,7 @@
 #include "gl/vertex_array.h"
 #include "camera.h"
 
-#define EQBUFSIZE 24
+#define EQBUFSIZE 32
 
 class Application {
 
