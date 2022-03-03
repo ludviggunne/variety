@@ -204,9 +204,9 @@ void Application::ImguiWindow()
 {
 	ImGui::Begin("Controls");
 
-	ImGui::Text("Bounds and stepsize:");
 	ImGui::SliderFloat3("Min: ", _dualContour.min, -5.0f, -.5f, "%.1f", 1.0f);
 	ImGui::SliderFloat3("Max: ", _dualContour.max, .5f, 5.0f, "%.1f", 1.0f);
+	ImGui::Text("Bounds and stepsize");
 	ImGui::DragInt("Resolution", &_dualContour.resolution, 0.2f, 8, 256);
 	ImGui::Spacing();
 	ImGui::InputText("Equation", _equationBuffer, EQBUFSIZE);
