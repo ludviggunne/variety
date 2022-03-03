@@ -189,7 +189,7 @@ bool Application::ImguiInit()
 	// Init
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	ImGui::StyleColorsDark();
+	ImGui::StyleColorsClassic();
 
 	// Backends
 	ImGui_ImplGlfw_InitForOpenGL(_window, true);
