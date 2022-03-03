@@ -32,6 +32,7 @@ workspace "variety"
             "%{prj.name}/src/**.h",
 
             "extern/glad/src/glad.c",
+
             "extern/imgui/imgui/imgui.cpp",
             "extern/imgui/imgui/imgui_demo.cpp",
             "extern/imgui/imgui/imgui_draw.cpp",
