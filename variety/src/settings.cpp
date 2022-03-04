@@ -42,4 +42,5 @@ namespace Settings {
 	const glm::vec3 GraphColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	const glm::vec3 AmbientColor = glm::vec3(0.7f, 0.7f, 1.0f);
 	const float     AmbientStrength = 0.1f;
+	const glm::vec3 SurfaceColor    = glm::vec3(0.8f, 0.8f, 0.8f);
 }

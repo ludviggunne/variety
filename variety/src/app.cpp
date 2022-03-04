@@ -171,6 +171,7 @@ bool Application::GLInit()
 
 	// Uniforms
 	_program->Use();
+	_program->SetUniform("uSurfaceColor",    Settings::SurfaceColor);
 	_program->SetUniform("uLightColor",      Settings::LightColor);
 	_program->SetUniform("uGraphColor",      Settings::GraphColor);
 	_program->SetUniform("uAmbientColor",    Settings::AmbientColor);

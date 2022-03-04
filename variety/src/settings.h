@@ -39,6 +39,7 @@ namespace Settings {
 
 	// Theme
 	extern const glm::vec3 BackgroundColor;
+	extern const glm::vec3 SurfaceColor;
 	extern const glm::vec3 LightColor;
 	extern const glm::vec3 GraphColor;
 	extern const glm::vec3 AmbientColor;
