@@ -222,6 +222,8 @@ void Application::ImguiWindow()
 	}
 
 	if (_dualContour.GetState() == DualContour::State::Compute) {
+		ImGui::SameLine();
+		if (ImGui::Button("Cancel")) _dualContour.Cancel();
 		ImGui::ProgressBar(_dualContour.GetProgress(), { -1, 0 }, _dualContour.GetProgressString());
 	}
 

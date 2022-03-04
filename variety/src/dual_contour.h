@@ -19,6 +19,7 @@ public:
 	State GetState() const { return _state; }
 	float GetProgress() const { return _progress; }
 	const char *GetProgressString() const { return _progressStr; }
+	void Cancel() { if (_state == State::Compute) _cancel = true; }
 
 private:
 	void ICompute(const exprtk::expression<float> &expr, 
@@ -44,6 +45,8 @@ private:
 	const char *_progressStr;
 	State _state;
 	std::vector<gl::Vertex> *_vertices;
+
+	bool _cancel;
 
 	// EXPRTK
 	float _varX;

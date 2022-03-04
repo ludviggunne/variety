@@ -21,7 +21,8 @@ DualContour::DualContour() :
 	_progress(0.0f),
 	_progressStr(_psNone),
 	_state(State::Standby),
-	_vertices(nullptr)
+	_vertices(nullptr),
+	_cancel(false)
 {
 	// Names switched because so z is up
 	_symbolTable.add_variable("x", _varX);
@@ -78,6 +79,7 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 	float &var_x, float &var_y, float &var_z)
 {
 	_state = State::Compute;
+	_cancel = false;
 
 	// Lock parameters
 	auto _xMin = xMin;
@@ -110,8 +112,14 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 	for (        i = 0, _varX = _xMin; i < xRes; i++, _varX += stepSize) {
 		_progress = i / static_cast<float>(xRes);
 		for (    j = 0, _varY = _yMin; j < yRes; j++, _varY += stepSize)
-			for (k = 0, _varZ = _zMin; k < zRes; k++, _varZ += stepSize)
+			for (k = 0, _varZ = _zMin; k < zRes; k++, _varZ += stepSize) {
+				if (_cancel) {
+					_cancel = false;
+					_state = State::Standby;
+					return;
+				}
 				samples[i + xRes * (j + yRes * k)] = expr.value();
+			}
 	}
 
 	// Add faces
@@ -123,6 +131,11 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 		_progress = i / static_cast<float>(xRes);
 		for (    j = 1, y = _yMin + stepSize; j < yRes; j++, y += stepSize)
 			for (k = 1, z = _zMin + stepSize; k < zRes; k++, z += stepSize) {
+				if (_cancel) {
+					_cancel = false;
+					_state = State::Standby;
+					return;
+				}
 
 				bool test0, test1;
 				glm::vec3 normal;
