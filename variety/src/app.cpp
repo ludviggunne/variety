@@ -98,6 +98,8 @@ void Application::Run()
 			else mousePressed = false;
 		}
 
+		if (glfwGetKey(_window, GLFW_KEY_C) == GLFW_PRESS) _camera.ResetCenter();
+
 		if (glfwWindowShouldClose(_window)) _running = false;
 	}
 }

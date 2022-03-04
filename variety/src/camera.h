@@ -20,6 +20,7 @@ public:
 
 	void OnMousePress(const glm::vec2 mousePos, bool instance, Action action);
 	void OnScroll(double offset);
+	void ResetCenter() { _center = Settings::CameraInitCenter; }
 
 
 private:
