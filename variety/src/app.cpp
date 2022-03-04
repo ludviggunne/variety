@@ -200,6 +200,10 @@ bool Application::ImguiInit()
 	ImGui_ImplGlfw_InitForOpenGL(_window, true);
 	ImGui_ImplOpenGL3_Init("#version 330");
 
+	// Style
+	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 6.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 6.0f);
+
 	return true;
 }
 
