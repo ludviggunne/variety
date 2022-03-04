@@ -301,5 +301,6 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 
 
 	// Finish
+	delete[] samples;
 	_state = State::Present;
 }
