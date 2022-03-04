@@ -92,11 +92,13 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 
 	auto xRes = resolution;
 
+
 	// Reset vertices
 	if (_vertices)
 		_vertices->clear();
 	else
 		_vertices = new std::vector<gl::Vertex>;
+
 
 	// Find sample box y and z dimensions
 	auto stepSize = (_xMax - _xMin) / xRes;
@@ -104,6 +106,7 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 	auto zRes = static_cast<int> ((_zMax - _zMin) / stepSize);
 
 	auto *samples = new float[xRes * yRes * zRes];
+
 
 	// Sample function
 	_progress = 0.0f;
@@ -121,6 +124,7 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 				samples[i + xRes * (j + yRes * k)] = expr.value();
 			}
 	}
+
 
 	// Add faces
 	// Start one step ahead since we are considering edges
@@ -294,6 +298,7 @@ void DualContour::ICompute(const exprtk::expression<float> &expr,
 				}
 			}
 	}
+
 
 	// Finish
 	_state = State::Present;
