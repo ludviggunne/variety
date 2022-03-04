@@ -84,12 +84,15 @@ void Application::Run()
 					static_cast<float>(xpos),
 					static_cast<float>(ypos));
 
+				auto action = (glfwGetKey(_window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) ?
+					Camera::Action::Pan : Camera::Action::Rotation;
+
 				if (!mousePressed) {
 					mousePressed = true;
-					_camera.OnMousePress(mpos, true, Camera::Action::Rotation);
+					_camera.OnMousePress(mpos, true, action);
 				}
 				else {
-					_camera.OnMousePress(mpos, false, Camera::Action::Rotation);
+					_camera.OnMousePress(mpos, false, action);
 				}
 			}
 			else mousePressed = false;

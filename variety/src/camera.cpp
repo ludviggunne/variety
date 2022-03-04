@@ -13,7 +13,7 @@ glm::vec3 Camera::GetPosition() const
 	position = glm::rotate(position, _yRotation, glm::vec3(1.0f, 0.0f, 0.0f));
 	position = glm::rotate(position, _xRotation, glm::vec3(0.0f, 1.0f, 0.0f));
 
-	return position;
+	return _center + position;
 }
 
 void Camera::OnMousePress(const glm::vec2 mousePos, bool instance, Action action)
@@ -21,12 +21,20 @@ void Camera::OnMousePress(const glm::vec2 mousePos, bool instance, Action action
 	static glm::vec2 mouseOffset(0, 0);
 	static float xRotOffset = 0.0f;
 	static float yRotOffset = 0.0f;
+	static glm::vec3 centerOffset(0.0f);
+	static glm::vec3 panUnitX(0.0f);
+	static glm::vec3 panUnitY(0.0f);
 	static Action static_action = Action::Rotation;
 
 	if (instance) {
 		mouseOffset = mousePos;
 		xRotOffset  = _xRotation;
 		yRotOffset  = _yRotation;
+
+		centerOffset = _center;
+		auto unitMat = glm::inverse(glm::mat3(GetProjection()));
+		panUnitX = unitMat * glm::vec3(1.0f, 0.0f, 0.0f);
+		panUnitY = unitMat * glm::vec3(0.0f, 1.0f, 0.0f);
 
 		static_action = action;
 	}
@@ -44,7 +52,9 @@ void Camera::OnMousePress(const glm::vec2 mousePos, bool instance, Action action
 		break;
 
 	case Action::Pan:
-
+		_center = centerOffset + Settings::CameraPanSpeed * _distance * (
+			-panUnitX * (mousePos.x - mouseOffset.x)
+			+ panUnitY * (mousePos.y - mouseOffset.y));
 		break;
 	}
 }

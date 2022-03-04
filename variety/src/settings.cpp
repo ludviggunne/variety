@@ -10,6 +10,7 @@ namespace Settings {
 
 	const float CameraRotateSpeed = 0.5f;
 	const float CameraZoomSpeed   = 1.0f;
+	extern const float CameraPanSpeed = 0.002f;
 
 	const float CameraYRotClampAngle = 70.0f;
 
