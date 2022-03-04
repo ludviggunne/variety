@@ -240,6 +240,28 @@ void Application::ImguiWindow()
 		ImGui::ProgressBar(_dualContour.GetProgress(), { -1, 0 }, _dualContour.GetProgressString());
 	}
 
+	static bool showAdvancedSettings = false;
+	ImGui::Checkbox("Advanced options", &showAdvancedSettings);
+
+	if (showAdvancedSettings) {
+
+		ImGui::Text("Colors");
+
+		static glm::vec3 surfaceColor = Settings::SurfaceColor;
+		if(ImGui::ColorEdit3("Surface", &surfaceColor[0]))
+			_program->SetUniform("uSurfaceColor", surfaceColor);
+
+		static glm::vec3 lightColor = Settings::LightColor;
+		if (ImGui::ColorEdit3("Light", &lightColor[0]))
+			_program->SetUniform("uLightColor", lightColor);
+
+		static glm::vec3 ambientColor = Settings::AmbientColor;
+		if (ImGui::ColorEdit3("Ambient", &ambientColor[0]))
+			_program->SetUniform("uAmbientColor", ambientColor);
+
+		ImGui::ColorEdit3("Background", &_backgroundColor[0]);
+	}
+
 	ImGui::End();
 }
 
