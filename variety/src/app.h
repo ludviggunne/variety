@@ -35,6 +35,8 @@ private:
 private:
 	bool _running;
 
+	glm::vec3 _backgroundColor;
+
 	GLFWwindow *_window;
 	int _width, _height;
 

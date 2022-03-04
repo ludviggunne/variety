@@ -10,7 +10,7 @@
 
 Application::Application() 
 	: _program(nullptr), _vertexArray(nullptr),
-	_running(false),
+	_running(false), _backgroundColor(Settings::BackgroundColor),
 	_width(Settings::WindowInitWidth), _height(Settings::WindowInitHeight)
 {
 	WindowInit();
@@ -41,8 +41,11 @@ void Application::Run()
 
 		glfwPollEvents();
 
-		auto &bc = Settings::BackgroundColor;
-		GLcall(glClearColor(bc.r, bc.g, bc.b, 1.0f));
+		GLcall(glClearColor(
+			_backgroundColor.r, 
+			_backgroundColor.g, 
+			_backgroundColor.b, 
+			1.0f));
 		GLcall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
 		// New Imgui Frame
