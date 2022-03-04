@@ -1,23 +1,23 @@
-#include "dual_contour.h"
+#include "meshbuilder.h"
 
 #include <thread>
 
 #include "gl/misc.h"
 
-const char *DualContour::_psNone = "";
-const char *DualContour::_psSampling = "Sampling";
-const char *DualContour::_psBuilding = "Building";
+const char *MeshBuilder::_psNone = "";
+const char *MeshBuilder::_psSampling = "Sampling";
+const char *MeshBuilder::_psBuilding = "Building";
 
-DualContour::DualContour() :
-	xMin(Settings::DualInitXMin),
-	yMin(Settings::DualInitYMin),
-	zMin(Settings::DualInitZMin),
+MeshBuilder::MeshBuilder() :
+	xMin(Settings::BuilderInitXMin),
+	yMin(Settings::BuilderInitYMin),
+	zMin(Settings::BuilderInitZMin),
 
-	xMax(Settings::DualInitXMax),
-	yMax(Settings::DualInitYMax),
-	zMax(Settings::DualInitZMax),
+	xMax(Settings::BuilderInitXMax),
+	yMax(Settings::BuilderInitYMax),
+	zMax(Settings::BuilderInitZMax),
 
-	resolution(Settings::DualInitResolution),
+	resolution(Settings::BuilderInitResolution),
 	_progress(0.0f),
 	_progressStr(_psNone),
 	_state(State::Standby),
@@ -30,13 +30,13 @@ DualContour::DualContour() :
 	_symbolTable.add_variable("y", _varZ);
 }
 
-DualContour::~DualContour()
+MeshBuilder::~MeshBuilder()
 {
 	if (_vertices)
 		delete _vertices;
 }
 
-bool DualContour::Compute(const std::string &equation)
+bool MeshBuilder::Compute(const std::string &equation)
 {
 	// Setup expression
 	exprtk::expression<float> expression;
@@ -59,13 +59,13 @@ bool DualContour::Compute(const std::string &equation)
 		return false;
 
 	// Dispatch computation
-	std::thread(&DualContour::ICompute, this, expression, 
+	std::thread(&MeshBuilder::ICompute, this, expression, 
 		std::ref(_varX), std::ref(_varY), std::ref(_varZ)).detach();
 
 	return true;
 }
 
-std::vector<gl::Vertex> const *DualContour::GetVertices()
+std::vector<gl::Vertex> const *MeshBuilder::GetVertices()
 {
 	if (_state == State::Present && !_vertices->empty()) {
 		_state = State::Standby;
@@ -75,7 +75,7 @@ std::vector<gl::Vertex> const *DualContour::GetVertices()
 	return nullptr;
 }
 
-void DualContour::ICompute(const exprtk::expression<float> &expr, 
+void MeshBuilder::ICompute(const exprtk::expression<float> &expr, 
 	float &var_x, float &var_y, float &var_z)
 {
 	_state = State::Compute;

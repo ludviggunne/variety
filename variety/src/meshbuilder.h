@@ -5,13 +5,13 @@
 
 #include "exprtk/exprtk.hpp"
 
-class DualContour {
+class MeshBuilder {
 public:
 	enum class State { Standby, Compute, Present };
 
 public:
-	DualContour();
-	~DualContour();
+	MeshBuilder();
+	~MeshBuilder();
 
 	bool Compute(const std::string &equation);
 

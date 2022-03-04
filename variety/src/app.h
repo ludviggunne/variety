@@ -3,7 +3,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
-#include "dual_contour.h"
+#include "meshbuilder.h"
 #include "gl/program.h"
 #include "gl/vertex_array.h"
 #include "camera.h"
@@ -40,7 +40,7 @@ private:
 	GLFWwindow *_window;
 	int _width, _height;
 
-	DualContour _dualContour;
+	MeshBuilder _meshBuilder;
 
 	gl::VertexArray *_vertexArray;
 	gl::Program *_program;

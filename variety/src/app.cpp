@@ -18,7 +18,7 @@ Application::Application()
 	ImguiInit();
 
 	ResizeCallback(_window, _width, _height);
-	strcpy(_equationBuffer, Settings::DualDefaultEquation);
+	strcpy(_equationBuffer, Settings::BuilderDefaultEquation);
 }
 
 
@@ -54,7 +54,7 @@ void Application::Run()
 		ImGui::NewFrame();
 
 		// Get mesh
-		std::vector<gl::Vertex> const *verts = _dualContour.GetVertices();
+		std::vector<gl::Vertex> const *verts = _meshBuilder.GetVertices();
 		if (verts) {
 			_vertexArray->VertexData(&(*verts)[0], verts->size());
 		}
@@ -218,14 +218,14 @@ void Application::ImguiWindow()
 	static bool parseFailed = false;
 	ImGui::Begin("Controls");
 
-	ImGui::DragFloat3("Min", _dualContour.min, 0.01f, -5.0f, -.5f, "%.1f", 1.0f);
-	ImGui::DragFloat3("Max", _dualContour.max, 0.01f, .5f, 5.0f, "%.1f", 1.0f);
-	ImGui::DragInt("Resolution", &_dualContour.resolution, 0.2f, 8, 256);
+	ImGui::DragFloat3("Min", _meshBuilder.min, 0.01f, -5.0f, -.5f, "%.1f", 1.0f);
+	ImGui::DragFloat3("Max", _meshBuilder.max, 0.01f, .5f, 5.0f, "%.1f", 1.0f);
+	ImGui::DragInt("Resolution", &_meshBuilder.resolution, 0.2f, 8, 256);
 	ImGui::Spacing();
 	ImGui::InputText("Equation", _equationBuffer, EQBUFSIZE);
 
 	if (ImGui::Button("Generate mesh")) {
-		parseFailed = !_dualContour.Compute(_equationBuffer);
+		parseFailed = !_meshBuilder.Compute(_equationBuffer);
 	}
 
 	if (parseFailed) {
@@ -234,10 +234,10 @@ void Application::ImguiWindow()
 		ImGui::PopStyleColor();
 	}
 
-	if (_dualContour.GetState() == DualContour::State::Compute) {
+	if (_meshBuilder.GetState() == MeshBuilder::State::Compute) {
 		ImGui::SameLine();
-		if (ImGui::Button("Cancel")) _dualContour.Cancel();
-		ImGui::ProgressBar(_dualContour.GetProgress(), { -1, 0 }, _dualContour.GetProgressString());
+		if (ImGui::Button("Cancel")) _meshBuilder.Cancel();
+		ImGui::ProgressBar(_meshBuilder.GetProgress(), { -1, 0 }, _meshBuilder.GetProgressString());
 	}
 
 	static bool showAdvancedSettings = false;

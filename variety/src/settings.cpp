@@ -14,18 +14,18 @@ namespace Settings {
 
 	const float CameraYRotClampAngle = 70.0f;
 
-	// Algorithm
-	const float DualInitXMin = -2.0f;
-	const float DualInitYMin = -2.0f;
-	const float DualInitZMin = -2.0f;
+	// Mesh builder
+	const float BuilderInitXMin = -2.0f;
+	const float BuilderInitYMin = -2.0f;
+	const float BuilderInitZMin = -2.0f;
 
-	const float DualInitXMax = 2.0f;
-	const float DualInitYMax = 2.0f;
-	const float DualInitZMax = 2.0f;
+	const float BuilderInitXMax = 2.0f;
+	const float BuilderInitYMax = 2.0f;
+	const float BuilderInitZMax = 2.0f;
 
-	const int DualInitResolution = 128;
+	const int BuilderInitResolution = 128;
 
-	const char *DualDefaultEquation = "x*y/z=x*z/y+y*z";
+	const char *BuilderDefaultEquation = "x*y/z=x*z/y+y*z";
 
 	// Window
 	const int WindowInitWidth = 800;

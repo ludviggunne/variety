@@ -16,18 +16,18 @@ namespace Settings {
 
 	extern const float CameraYRotClampAngle;
 
-	// Algorithm
-	extern const float DualInitXMin;
-	extern const float DualInitYMin;
-	extern const float DualInitZMin;
+	// Mesh builder
+	extern const float BuilderInitXMin;
+	extern const float BuilderInitYMin;
+	extern const float BuilderInitZMin;
 
-	extern const float DualInitXMax;
-	extern const float DualInitYMax;
-	extern const float DualInitZMax;
+	extern const float BuilderInitXMax;
+	extern const float BuilderInitYMax;
+	extern const float BuilderInitZMax;
 
-	extern const int DualInitResolution;
+	extern const int BuilderInitResolution;
 
-	extern const char *DualDefaultEquation;
+	extern const char *BuilderDefaultEquation;
 
 	// Window
 	extern const int WindowInitWidth;
