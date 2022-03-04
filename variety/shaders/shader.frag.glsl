@@ -17,5 +17,5 @@ void main()
   
     gl_FragColor = clamp(lum * vec4(uLightColor, 1.0f) * vec4(1.0, 1.0, 1.0, 1.0) 
         + uAmbientStrength * vec4(uAmbientColor, 1.0), 0, 1);
-    gl_FragColor *= abs(vPosition);
+    //gl_FragColor *= abs(vPosition);
 }
