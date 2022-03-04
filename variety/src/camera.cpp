@@ -18,7 +18,7 @@ glm::vec3 Camera::GetPosition() const
 
 void Camera::OnMousePress(const glm::vec2 mousePos, bool instance, Action action)
 {
-	static glm::vec2 mouseOffset(0, 0);
+	static glm::vec2 mouseOffset(0.0f);
 	static float xRotOffset = 0.0f;
 	static float yRotOffset = 0.0f;
 	static glm::vec3 centerOffset(0.0f);
