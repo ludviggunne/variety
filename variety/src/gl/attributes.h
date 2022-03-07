@@ -20,6 +20,8 @@ namespace gl {
 
 				case(GL_FLOAT): return sizeof(float);
 				case(GL_INT):   return sizeof(int);
+
+				default:        return 0;
 			}
 		}
 

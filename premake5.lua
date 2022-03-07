@@ -72,6 +72,9 @@ workspace "variety"
 
         buildoptions "/bigobj"
 
+        -- Use deprecated functions (glm)
+        defines "_CRT_SECURE_NO_WARNINGS"
+
         filter "configurations:Debug"
 		    defines "V_DEBUG"
 

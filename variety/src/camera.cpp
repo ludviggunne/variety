@@ -61,7 +61,7 @@ void Camera::OnMousePress(const glm::vec2 mousePos, bool instance, Action action
 
 void Camera::OnScroll(double offset)
 {
-	_distance -= offset * Settings::CameraZoomSpeed;
+	_distance -= static_cast<float>(offset) * Settings::CameraZoomSpeed;
 	if (_distance < 0)
 		_distance += Settings::CameraZoomSpeed;
 }

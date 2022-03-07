@@ -3,7 +3,6 @@
 #include <sstream>
 #include <map>
 
-#include "glm/glm.hpp"
 #include "glm/ext.hpp"
 
 #include "gl.h"

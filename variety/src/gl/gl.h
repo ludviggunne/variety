@@ -2,6 +2,12 @@
 
 #include <iostream>
 
+#ifdef _WIN32
+#include <windows.h>
+#else
+#define APIENTRY
+#endif
+
 #include "glad/glad.h"
 
 void GLClearError();

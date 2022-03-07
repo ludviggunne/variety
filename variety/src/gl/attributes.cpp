@@ -11,7 +11,7 @@ namespace gl {
 	void VertexLayout::Enable() const
 	{
 		int index  = 0;
-		int offset = 0;
+		size_t offset = 0;
 		
 		for (auto &attr : _attributes) {
 
