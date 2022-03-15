@@ -240,10 +240,7 @@ void Application::ImguiWindow()
 		ImGui::ProgressBar(_meshBuilder.GetProgress(), { -1, 0 }, _meshBuilder.GetProgressString());
 	}
 
-	static bool showAdvancedSettings = false;
-	ImGui::Checkbox("Advanced options", &showAdvancedSettings);
-
-	if (showAdvancedSettings) {
+	if (ImGui::CollapsingHeader("Advanced options")) {
 
 		ImGui::Checkbox("Wireframe", &_wireframe);
 
