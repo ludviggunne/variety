@@ -24,7 +24,7 @@ namespace gl {
 		Bind();
 
 		// Vtodo: Current implementation makes no use of index buffer member. Consider removing it.
-		GLcall(glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(_vertexBuffer.Size())));
+		GLcall(glDrawArrays(primitive_type, 0, static_cast<GLsizei>(_vertexBuffer.Size())));
 	}
 
 	void VertexArray::VertexData(const Vertex *data, size_t size)
