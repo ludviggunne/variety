@@ -36,6 +36,7 @@ private:
 	bool _running;
 
 	glm::vec3 _backgroundColor;
+	bool _wireframe;
 
 	GLFWwindow *_window;
 	int _width, _height;

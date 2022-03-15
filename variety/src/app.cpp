@@ -10,7 +10,7 @@
 
 Application::Application() 
 	: _program(nullptr), _vertexArray(nullptr),
-	_running(false), _backgroundColor(Settings::BackgroundColor),
+	_running(false), _backgroundColor(Settings::BackgroundColor), _wireframe(false),
 	_width(Settings::WindowInitWidth), _height(Settings::WindowInitHeight)
 {
 	WindowInit();
@@ -65,7 +65,7 @@ void Application::Run()
 		_program->SetUniform("uLightPos", _camera.GetPosition());
 
 		// Render graph
-		_vertexArray->Draw(GL_TRIANGLES);
+		_vertexArray->Draw(_wireframe ? GL_LINES : GL_TRIANGLES);
 
 		// Imgui window
 		ImguiWindow();
@@ -244,6 +244,8 @@ void Application::ImguiWindow()
 	ImGui::Checkbox("Advanced options", &showAdvancedSettings);
 
 	if (showAdvancedSettings) {
+
+		ImGui::Checkbox("Wireframe", &_wireframe);
 
 		ImGui::Text("Colors");
 
