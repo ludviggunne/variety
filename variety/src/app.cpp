@@ -13,9 +13,9 @@ Application::Application()
 	_running(false), _backgroundColor(Settings::BackgroundColor), _wireframe(false),
 	_width(Settings::WindowInitWidth), _height(Settings::WindowInitHeight)
 {
-	WindowInit();
-	GLInit();
-	ImguiInit();
+	assert(WindowInit());
+	assert(GLInit());
+	assert(ImguiInit());
 
 	ResizeCallback(_window, _width, _height);
 	strcpy(_equationBuffer, Settings::BuilderDefaultEquation);
