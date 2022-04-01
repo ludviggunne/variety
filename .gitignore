@@ -1,12 +1,6 @@
 # Directories
-.vs/
-bin/
-obj/
-lib/
+build/
+.vscode/
 
 # Files
-*.vcxproj
-*.vcxproj.user
-*.vcxproj.filters
-*.sln
-*.ini
+**.ini
